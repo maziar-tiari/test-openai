@@ -1,0 +1,9 @@
+{
+	"firstName": "john",
+	"surname": "doe",
+	"languages": [ "ENGLISH", "GERMAN" ],
+	"birthDate": null,
+	"gender": "M",
+	"location": "new-city",
+	"relationshipStatus": "DIVORCED"
+}

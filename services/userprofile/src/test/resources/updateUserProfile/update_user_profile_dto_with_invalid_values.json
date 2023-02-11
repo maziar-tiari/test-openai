@@ -1,0 +1,6 @@
+{
+  "languages": [ 1, 2 ],
+  "birthDate": "INVALID_BDAY",
+  "gender": "INVALID_GENDER",
+  "relationshipStatus": "INVALID_STATUS"
+}

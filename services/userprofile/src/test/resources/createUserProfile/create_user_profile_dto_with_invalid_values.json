@@ -1,0 +1,9 @@
+{
+  "firstName": 1,
+  "surname": 1,
+  "languages": [ "INVALID1", "INVALID2" ],
+  "location": "city",
+  "birthDate": "INVALID_BDAY",
+  "gender": "UNKNOWN_GENDER",
+  "relationshipStatus": "UNKNOWN_STATUS"
+}

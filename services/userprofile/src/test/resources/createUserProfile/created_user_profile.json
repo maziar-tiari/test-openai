@@ -1,0 +1,19 @@
+{
+	"userId": "user_id",
+	"username": "john.doe",
+	"firstName": "john",
+	"surname": "doe",
+	"languages": [ "ENGLISH", "GERMAN" ],
+	"location": "city",
+	"birthDate": "1990-01-01",
+	"gender": "M",
+	"relationshipStatus": "MARRIED",
+	"avatarImageId": null,
+    "activityIds": null,
+    "appliedActivityIds": null,
+    "memberActivityIds": null,
+    "groupIds": null,
+    "jobIds": null,
+    "modifiedAt": null,
+    "info": null
+}

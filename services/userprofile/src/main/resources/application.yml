@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1/
+
+app:
+  kafka:
+    topics:
+      new-activity: new-activity
+      removed-activity: removed-activity
+      applied-to-activity: applied-to-activity
+      recalled-activity-application: recalled-activity-application
+      joined-activity: joined-activity
+      left-activity: left-activity
+
+spring:
+  profiles:
+    active: default
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_profile
+    username: buddies
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: user-service
+      auto-offset-reset: earliest
