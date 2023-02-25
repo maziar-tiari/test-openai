@@ -17,7 +17,9 @@ class NewActivity (
     val endTime: LocalTime?,
     val tagIds: List<String> = emptyList(),
 ) {
-    fun toActivity(): Activity = Activity(
+    fun toActivity(userId: String, username: String): Activity = Activity(
+        ownerUsername = username,
+        ownerUserId = userId,
         title = title,
         description = description,
         imageUUID = imageUUID,

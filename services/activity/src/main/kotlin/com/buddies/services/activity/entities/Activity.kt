@@ -15,7 +15,7 @@ class Activity (
         var id: UUID = UUID.randomUUID(),
         @set:NonNull
         @field:NonNull
-        var ownerUserUUID: String = "",
+        var ownerUserId: String = "",
         @set:NonNull
         @field:NonNull
         var ownerUsername: String = "",

@@ -1,16 +1,24 @@
 package com.buddies.services.activity.service
 
 import com.buddies.services.activity.dto.NewActivity
+import com.buddies.services.activity.entities.Activity
 import com.buddies.services.activity.persistence.ActivityRepository
+import com.buddies.services.activity.testutils.TestUtils.USERNAME
+import com.buddies.services.activity.testutils.TestUtils.USER_ID
+import com.buddies.services.activity.testutils.TestUtils.newActivity
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.*;
 import org.springframework.boot.test.mock.mockito.MockBean
 
 import org.springframework.boot.test.mock.mockito.SpyBean
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.LocalDate
 import java.time.LocalTime
 
+@ExtendWith(SpringExtension::class)
 class ActivityServiceTest {
 
     @MockBean
@@ -19,19 +27,13 @@ class ActivityServiceTest {
     @SpyBean
     private lateinit var activityService: ActivityService
 
-    private val newActivity = NewActivity(
-        title = "title",
-        description = "description",
-        imageUUID = "imageUUID",
-        startDate = LocalDate.now(),
-        endDate = LocalDate.now(),
-        startTime = LocalTime.now(),
-        endTime = LocalTime.now(),
-        tagIds = listOf("tagId1", "tagId2")
-    );
-
     @Test
     fun save() {
-        `when`(activityRepository.save(any())).thenReturn(null).thenReturn(newActivity.toActivity())
+        var expected = newActivity.toActivity(USER_ID, USERNAME);
+        `when`(activityRepository.save(any(Activity::class.java))).thenReturn(expected)
+        val result = activityService.save(newActivity, USER_ID, USERNAME)
+        assertThat(result).isNotNull
+        assertThat(result).isEqualTo(expected)
+        assertThat(result.id).isNotNull
     }
 }

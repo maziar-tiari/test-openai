@@ -97,9 +97,11 @@ class UserProfileIT extends PostgresContainerProvider {
 		}
 		
 		@Test
-		void updateNonExistingUserProfile_shouldReturnNotFound() throws Exception {
+		void updateNonExistingUserProfile_shouldReturnNewUserProfile() throws Exception {
 			var response = userRequest(getUpdateUserProfileBody(), PUT);
-			assertThat(response.getStatusCode().value()).isEqualTo(NOT_FOUND.value());
+			var expected = getExpectedUpdatedUserProfile();
+			assertThat(response.getStatusCode().value()).isEqualTo(ACCEPTED.value());
+			JSONAssert.assertEquals(expected, response.getBody(), JSONCompareMode.LENIENT);
 		}
 	}
 	

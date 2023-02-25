@@ -1,0 +1,10 @@
+{
+  "title": "This is an Activity",
+  "description": "This is an cool description",
+  "imageUUID": "image_uuid",
+  "startDate": "2020-01-01",
+  "endDate": "2020-01-01",
+  "startTime": "12:00:00",
+  "endTime": "18:00:00",
+  "tagIds": [ "tag_id_1", "tag_id_2" ]
+}
