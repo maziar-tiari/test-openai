@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.buddies.services.userprofile.dto.NewUserProfile;
-import com.buddies.services.userprofile.persistence.UserProfile;
+import com.buddies.services.userprofile.entitymodels.UserProfile;
 import com.buddies.services.userprofile.service.UserProfileService;
 import com.buddies.common.shared.BuddiesHttpHeaders;
 
@@ -42,8 +42,9 @@ public class SecuredUserProfileController {
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	public UserProfile update(
 			final @Valid @RequestBody NewUserProfile newUserProfile,
-			@RequestHeader(BuddiesHttpHeaders.USER_ID) @NotBlank String userId) {
-		return userProfileService.update(newUserProfile, userId);
+			@RequestHeader(BuddiesHttpHeaders.USER_ID) @NotBlank String userId,
+			@RequestHeader(BuddiesHttpHeaders.USERNAME) @NotBlank String username) {
+		return userProfileService.update(newUserProfile, userId, username);
 	}
 
 	@DeleteMapping

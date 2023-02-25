@@ -2,6 +2,7 @@ package com.buddies.services.userprofile.persistence;
 
 import java.util.Optional;
 
+import com.buddies.services.userprofile.entitymodels.UserProfile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 

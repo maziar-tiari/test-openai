@@ -1,36 +1,30 @@
 package com.buddies.services.userprofile.kafka.consumer;
 
-import com.buddies.common.shared.kafka.KafkaActivityMessage;
+import com.buddies.services.userprofile.dto.KafkaActivityMessage;
 import com.buddies.services.userprofile.service.UserProfileService;
-import lombok.Getter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.CountDownLatch;
+import org.springframework.validation.annotation.Validated;
 
 @RequiredArgsConstructor
 @Component
 @Slf4j
 public class NewActivityConsumer {
     private final UserProfileService userProfileService;
-    private @Getter CountDownLatch latch = new CountDownLatch(1);
-    private @Getter KafkaActivityMessage receivedMessage;
+
     @KafkaListener(
             topics = "${app.kafka.topics.new-activity}",
-            groupId = "${spring.kafka.consumer.group-id}",
-            containerFactory = "activityKafkaListenerContainerFactory"
+            groupId = "${spring.kafka.consumer.group-id}"
     )
-    public void consume(KafkaActivityMessage message) {
-        log.info("New activity: {}", message);
-        userProfileService.addActivity(message.userId(), message.activityId());
-        latch.countDown();
-        this.receivedMessage = message;
-        System.out.println("Received Message: " + message);
-    }
-
-    public void resetLatch() {
-        latch = new CountDownLatch(1);
+    public void consume(@Payload KafkaActivityMessage message)  {
+        log.info("On topic: {}, consumed message: {}", "${app.kafka.topics.new-activity}", message);
+        if (message.activityId() == null || message.userId() == null) {
+            return;
+        }
+        userProfileService.addActivity(message.activityId(), message.userId(), message.username());
     }
 }

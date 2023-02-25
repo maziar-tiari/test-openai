@@ -6,7 +6,7 @@ import org.springframework.http.HttpHeaders;
 
 import com.buddies.common.shared.BuddiesHttpHeaders;
 import com.buddies.services.userprofile.dto.NewUserProfile;
-import com.buddies.services.userprofile.persistence.UserProfile;
+import com.buddies.services.userprofile.entitymodels.UserProfile;
 import com.buddies.services.userprofile.types.Gender;
 import com.buddies.services.userprofile.types.RelationshipStatus;
 

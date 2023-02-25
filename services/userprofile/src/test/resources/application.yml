@@ -36,15 +36,12 @@ spring:
     deserialization:
       fail-on-unknown-properties: true
   kafka:
-    bootstrap-servers: localhost:9092
     consumer:
       group-id: user-service
+      auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      auto-offset-reset: latest
       properties:
-        error:
-          handler: org.springframework.kafka.listener.SeekToCurrentErrorHandler
         spring:
           json:
             value:
@@ -59,7 +56,3 @@ spring:
             value:
               default:
                 type: com.buddies.services.userprofile.dto.KafkaActivityMessage
-    replication:
-      factor: 3
-    partition:
-     number: 10

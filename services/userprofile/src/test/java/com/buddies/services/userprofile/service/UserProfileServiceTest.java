@@ -3,6 +3,7 @@ package com.buddies.services.userprofile.service;
 import static com.buddies.services.userprofile.util.UserProfileTestBuilder.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.NoSuchElementException;
@@ -18,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.buddies.services.userprofile.dto.NewUserProfile;
-import com.buddies.services.userprofile.persistence.UserProfile;
+import com.buddies.services.userprofile.entitymodels.UserProfile;
 import com.buddies.services.userprofile.persistence.UserProfileRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -156,26 +157,27 @@ class UserProfileServiceTest {
 		void updateUserProfileByNullArguments_shouldReturnNullPointerException() {
 			assertThrows(
 					NullPointerException.class,
-					() -> userProfileService.update(newUserProfile, null));
+					() -> userProfileService.update(newUserProfile, null, null));
 			when(userProfileRepository.findByUserId(USER_ID)).thenReturn(Optional.of(getUserProfile));
 			assertThrows(
 					NullPointerException.class,
-					() -> userProfileService.update(null, USER_ID));
+					() -> userProfileService.update(null, USER_ID, USERNAME));
 		}
 		
 		@Test
-		void updateNonExistingUserProfile_shouldReturnNoSuchElementException() {
+		void updateNonExistingUserProfile_shouldCreateAndReturnNewUserProfile() {
 			when(userProfileRepository.findByUserId(USER_ID)).thenReturn(Optional.empty());
-			assertThrows(
-					NoSuchElementException.class,
-					() -> userProfileService.update(newUserProfile, USER_ID));
+			when(userProfileRepository.save(any(UserProfile.class))).thenReturn(getUserProfile);
+			assertThat(userProfileRepository.findByUserId(USER_ID)).isEmpty();
+			var result = userProfileService.update(newUserProfile, USER_ID, USERNAME);
+			assertThat(result).isEqualTo(getUserProfile);
 		}
 		
 		@Test
 		void updateUserProfile_shouldReturnUpdatedUserProfile() {
 			when(userProfileRepository.findByUserId(USER_ID)).thenReturn(Optional.of(getUserProfile));
 			when(userProfileRepository.save(updatedUserProfile())).thenReturn(updatedUserProfile());
-			var result = userProfileService.update(updateUserProfileDto(), USER_ID);
+			var result = userProfileService.update(updateUserProfileDto(), USER_ID, USERNAME);
 			assertThat(result).isEqualTo(updatedUserProfile());
 		}
 	}

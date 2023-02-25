@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.buddies.services.userprofile.persistence.ColumnLength;
-import com.buddies.services.userprofile.persistence.UserProfile;
+import com.buddies.services.userprofile.entitymodels.UserProfile;
 import com.buddies.services.userprofile.service.UserProfileService;
 
 import jakarta.validation.constraints.Min;

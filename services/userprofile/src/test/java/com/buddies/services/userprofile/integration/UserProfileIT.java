@@ -30,7 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import org.springframework.http.ResponseEntity;
 
 import com.buddies.services.userprofile.UserProfileApplication;
-import com.buddies.services.userprofile.persistence.UserProfile;
+import com.buddies.services.userprofile.entitymodels.UserProfile;
 import com.buddies.services.userprofile.persistence.UserProfileRepository;
 import com.buddies.services.userprofile.util.PostgresContainerProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;

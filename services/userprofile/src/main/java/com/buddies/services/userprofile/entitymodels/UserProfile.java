@@ -1,9 +1,11 @@
-package com.buddies.services.userprofile.persistence;
+package com.buddies.services.userprofile.entitymodels;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.buddies.services.userprofile.persistence.ColumnLength;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -98,26 +100,44 @@ public class UserProfile {
 	private RelationshipStatus relationshipStatus;
 
 	public void addActivityId(Long id) {
+		if (this.activityIds == null) {
+			this.activityIds = new ArrayList<>();
+		}
 		this.activityIds.add(id);
 	}
 
 	public void addAppliedActivityId(Long id) {
+		if (this.appliedActivityIds == null) {
+			this.appliedActivityIds = new ArrayList<>();
+		}
 		this.appliedActivityIds.add(id);
 	}
 
 	public void addMemberActivityId(Long id) {
+		if (this.memberActivityIds == null) {
+			this.memberActivityIds = new ArrayList<>();
+		}
 		this.memberActivityIds.add(id);
 	}
 
 	public void addGroupId(Long id) {
+		if (this.groupIds == null) {
+			this.groupIds = new ArrayList<>();
+		}
 		this.groupIds.add(id);
 	}
 
 	public void addJobId(Long id) {
+		if (this.jobIds == null) {
+			this.jobIds = new ArrayList<>();
+		}
 		this.jobIds.add(id);
 	}
 
 	public void addLanguage(String language) {
+		if (this.languages == null) {
+			this.languages = new ArrayList<>();
+		}
 		this.languages.add(language);
 	}
 }

@@ -34,11 +34,11 @@ class UtilsTest {
 	
 	@Test
 	void updateObjectWithNullValues() throws Exception {
-		var srcObj = new Person();
+		var srcObj = new MortalEntity(null);
 		var dest = new Person("dest", 12);
 		var result = Utils.updateObject(srcObj, dest, Person.class);
 		assertEquals(srcObj.getAge(), result.getAge());
-		assertEquals(srcObj.getName(), result.getName());
+		assertEquals(dest.getName(), result.getName());
 	}
 
 	@Test
